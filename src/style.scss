@@ -1,0 +1,14 @@
+.wp-block-create-block-uncommon-ourpork-gallery {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+
+  background-color: var(--wp--preset--color--uncured-pink);
+
+  & .uncommon-audio-player {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+  }
+}
