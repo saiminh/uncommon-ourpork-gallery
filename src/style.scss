@@ -3,12 +3,47 @@
   width: 100vw;
   height: 100svh;
   overflow: hidden;
-
   background-color: var(--wp--preset--color--uncured-pink);
 
+  & .wp-block-image img {
+    opacity: 0;
+    transform: scale(.9);
+    transition: all .8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  & .loaded .wp-block-image img {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+}
+.uncommon-ourpork-overlay-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
   & .uncommon-audio-player {
     position: absolute;
     left: 1rem;
     bottom: 1rem;
+  }
+  & .wp-block-outermost-icon-block {
+    position: absolute;
+    width: 50%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    transform: translate(-50%, -60%);
+    pointer-events: none;
+
+    @media screen and (max-width: 599px) {
+      width: 70%;
+    }
+
+    & .icon-container {
+      width: 100%!important;
+    }
   }
 }

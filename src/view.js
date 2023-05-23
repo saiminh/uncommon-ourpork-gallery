@@ -9,14 +9,30 @@ const isMobile = ({ maxWidth = 639 } = {}) => {
   )
 }
 
+function checkImagesLoaded(){
+  let imagesLoaded = 0;
+  // get all images in swiperContent
+  const images = document.querySelectorAll('.uncommon-ourpork-gallery-content img');
+  images.forEach((image) => {
+    
+    image.setAttribute('loading', 'eager');
+
+    image.addEventListener('load', () => {
+      image.classList.add('loaded');
+      imagesLoaded++;
+      if (imagesLoaded === images.length) {
+        document.querySelector('.uncommon-ourpork-gallery-content').classList.add('loaded');
+      }
+    })
+  })
+}
+
 function initPorkGalleryScroll(){
   const scrollingMap = document.querySelector('.uncommon-ourpork-gallery-content');
+
   const mapclasses = Array.from(scrollingMap.classList);
   // find out how many rows of images there are
   const rows = parseInt(mapclasses.find(x => x.includes('columns-')).replace('columns-',''));
-  // find out how big the gap is between images
-  // const gap = window.getComputedStyle(scrollingMap, null)["gap"];
-  // const gapNoPx = parseInt(gap.replace('px',''));
 
   // clone the scrolling map 8 times
   if (!hasClonedElements) {
@@ -48,12 +64,8 @@ function initPorkGalleryScroll(){
       child.style.width = `80%`;
       child.style.margin = `10%`;
     })
-    
-    // This was to test the repeating
-    // if (index === 4) {
-    //   inner.style.backgroundColor = 'red';
-    // }
   })
+  checkImagesLoaded();
   //set dimensions
   scrollingMap.style.display = 'block';
   scrollingMap.style.width = `${ totalWidth }px`;
@@ -126,7 +138,7 @@ window.addEventListener('resize', () => {
   }, 100)
 })
 
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {  
   initPorkGalleryScroll();  
 })
 
